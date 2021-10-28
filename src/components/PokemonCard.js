@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { pokemonImage } from "../utils/pokemonImage";
 import '../assets/fonts.css';
@@ -63,10 +64,9 @@ text-decoration: none;
 `;
 
 const PokemonCard = ({name, id, url}) => {
-    const pokemonId = String(id).padStart(3, "0");
+  const pokemonId = String(id).padStart(3, "0");
   const image = pokemonImage(pokemonId);
   const capitalName = name.charAt(0).toUpperCase() + name.slice(1);
-  
 
   return (
   <Card>
@@ -80,7 +80,12 @@ const PokemonCard = ({name, id, url}) => {
     <DetailButton as="a" href={url} id={id}>Ver más</DetailButton>
   </Card>
   );
-
 };
+
+PokemonCard.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  url: PropTypes.string.isRequired
+}
 
 export default PokemonCard;

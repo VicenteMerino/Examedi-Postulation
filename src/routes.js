@@ -1,12 +1,12 @@
 import React from "react";
 import { renderRoutes } from "react-router-config";
-import Pokemons from "./views/Pokemons";
+import Pokemon from "./views/Pokemon";
 const Routes = () => {
   const routes = [
     {
       path: "/",
       exact: true,
-      component: Pokemons,
+      component: Pokemon,
     }
   ];
   return renderRoutes(routes);
