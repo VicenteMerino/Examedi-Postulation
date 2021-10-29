@@ -3,19 +3,24 @@ import PropTypes from "prop-types";
 import { Radar } from "react-chartjs-2";
 import styled, { css } from "styled-components";
 import { typeColors } from "../utils/typeColors";
+import { typeIcons } from "../utils/typeIcons";
 import '../assets/fonts.css';
 
 const PokemonImage = styled.img`
 display: block;
 margin-left: auto;
 margin-right: auto;
+max-height: 100%;
+max-width: 100%;
 `;
 
 const RowContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-bottom: 10px;
+  flex-wrap: wrap;
+  margin-right: 20px;
+
   ${props =>
     props.width &&
     css`
@@ -26,7 +31,6 @@ const RowContainer = styled.div`
     css`
       height: ${props.height}px;
     `}
-    display: inline-block;
     vertical-align: top;
 `;
 
@@ -55,6 +59,8 @@ const BackgroundImage = styled.div`
 background-color: #F0F0F0;
 border: 1px solid black;
 border-radius: 5px;
+max-height: 200px;
+max-width: 200px;
 `;
 
 const InformationContainer = styled.div`
@@ -67,7 +73,7 @@ flex-wrap: wrap;
 flex-direction: column;
 padding: 30px;
 margin-top: 80px;
-margin-bottom: 80px;
+margin-bottom: 30px;
 `;
 
 const StatsNameText = styled.span`
@@ -97,7 +103,7 @@ margin-top: 10px;
 border-radius: 15px;
 font-size: 20px;
 font-family: 'Roboto', sans-serif;
-box-shadow: 0 1px 0 #666, 0 1px 0 #444, 0 1px 1px rgba(0,0,0,0.5);
+margin-right: 5px;
 `
 
 const DetailCard = styled.div`
@@ -112,11 +118,25 @@ flex-wrap: wrap;
 padding: 20px;
 `
 
-const PokeomName = styled.h1`
+const PokemonName = styled.h1`
 font-family: 'Roboto', sans-serif;
 font-size: 40px;
 font-weight: bold;
 margin-bottom: 10px;
+`
+const TypeImage = styled.img`
+height: 40px;
+width: 40px;
+margin-left: 5px;
+`
+
+const TypeContainer = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center;
+margin-bottom: 10px;
+margin-left: 10px;
+margin-right: 10px;
 `
 
 const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, height }) => {
@@ -164,7 +184,7 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
     <DetailCard>
       <RowContainer>
         <ColumnContainer alignItems="center">
-          <PokeomName>{name} #{id}</PokeomName>
+          <PokemonName>{name} #{id}</PokemonName>
           <BackgroundImage>
             <PokemonImage src={image} />
           </BackgroundImage>
@@ -193,10 +213,19 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
             </ColumnContainer>
           </div>
         </InformationContainer>
-      
-        <ColumnContainer alignItems="center">
-            {types.map((type, index) => (<TypeBadge key={index} type={type.toLowerCase()}><span>{type}</span></TypeBadge>))}
+        <ColumnContainer>
+          <h3 style={{fontFamily: "'Roboto', sans-serif", marginLeft: "30px"}}>Types</h3>
+          <RowContainer alignItems="center">
+              {types.map((type, index) => (
+              <TypeContainer>
+                <TypeBadge key={index} type={type.toLowerCase()}>
+                  <span>{type}</span>
+                </TypeBadge>
+                <TypeImage src={typeIcons[type.toLowerCase()]} alt={type} />
+              </TypeContainer>))}
+        </RowContainer>
         </ColumnContainer>
+
       </ColumnContainer>
       </RowContainer>
 

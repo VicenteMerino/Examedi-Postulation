@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import getPokemonDetail from "../utils/fetch/getPokemonDetail";
 import PokemonDetailCard from "../components/PokemonDetailCard";
+import getPokemonDetail from "../utils/fetch/getPokemonDetail";
 import { pokemonImage } from "../utils/pokemonImage";
 
 const BackButton = styled.a`
