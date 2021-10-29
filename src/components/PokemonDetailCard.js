@@ -64,7 +64,7 @@ max-width: 200px;
 `;
 
 const InformationContainer = styled.div`
-background-color: #26A8FF;
+background-color: #1AC8F7;
 width: 350px;
 height: 150px;
 border-radius: 15px;
