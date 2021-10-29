@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import getPokemonDetail from "../utils/fetch/getPokemonDetail";
 import PokemonDetailCard from "../components/PokemonDetailCard";
@@ -52,7 +53,7 @@ const firstLetterUppercase = (string) => {
 };
 
 const PokemonDetail = ({ match }) => {
-  const [pokemon, setPokemon] = useState({});
+  console.log(match);
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [types, setTypes] = useState([]);
@@ -66,7 +67,6 @@ const PokemonDetail = ({ match }) => {
   useEffect(() => {
     getPokemonDetail(match.params.id).then(({data, status}) => {
       if (status === 200) {
-        setPokemon(data);
         setName(firstLetterUppercase(data.name));
         setImage(pokemonImage(String(data.id).padStart(3, "0")));
         setId(String(data.id).padStart(3, "0"));
@@ -98,5 +98,9 @@ const PokemonDetail = ({ match }) => {
 
   );
 }
+
+PokemonDetail.propTypes = {
+  match: PropTypes.object.isRequired
+};
 
 export default PokemonDetail;

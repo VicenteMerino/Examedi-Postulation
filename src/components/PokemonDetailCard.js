@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Radar } from "react-chartjs-2";
 import styled, { css } from "styled-components";
@@ -137,7 +137,6 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
       }
     ]
   };
-  console.log(Math.max(...statsValues));
   const options = {
     plugins: {
       legend: {
@@ -161,7 +160,6 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
       }
     },
   };
-console.log(types)
   return (
     <DetailCard>
       <RowContainer>
@@ -191,13 +189,13 @@ console.log(types)
             <div>
             <ColumnContainer>
               <StatsNameText>Abilities</StatsNameText>
-              {abilities.map(ability => (<StatsNameValue>{ability}</StatsNameValue>))}
+              {abilities.map((ability, index) => (<StatsNameValue key={index}>{ability}</StatsNameValue>))}
             </ColumnContainer>
           </div>
         </InformationContainer>
       
         <ColumnContainer alignItems="center">
-            {types.map(type => (<TypeBadge type={type.toLowerCase()}><span>{type}</span></TypeBadge>))}
+            {types.map((type, index) => (<TypeBadge key={index} type={type.toLowerCase()}><span>{type}</span></TypeBadge>))}
         </ColumnContainer>
       </ColumnContainer>
       </RowContainer>
