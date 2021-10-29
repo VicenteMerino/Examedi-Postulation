@@ -6,4 +6,4 @@ export default async function getPokemonDetail(id) {
   const data = response.data;
   const status = response.status;
   return { data, status };
-};
+}

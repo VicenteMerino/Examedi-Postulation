@@ -76,7 +76,7 @@ display: inline-block;
 text-decoration: none;
 `;
 
-const PokemonCard = ({name, id, url}) => {
+const PokemonCard = ({name, id}) => {
   const pokemonId = String(id).padStart(3, "0");
   const image = pokemonImage(pokemonId);
   const capitalName = name.charAt(0).toUpperCase() + name.slice(1);
