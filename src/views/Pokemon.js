@@ -50,27 +50,37 @@ const ButtonContainer = styled.div`
 `;
 
 const Pokemon = () => {
-  const [pokemon, setPokemon] = useState([]);
-  const [nextQuery, setNextQuery] = useState("");
-  const [initialPokemon, setInitialPokemon] = useState([]);
-  const [initialNextQuery, setInitialNextQuery] = useState("");
+  const [pokemon, setPokemon] = useState(JSON.parse(localStorage.getItem("pokemon")) || []);
+  const [nextQuery, setNextQuery] = useState(JSON.parse(localStorage.getItem("nextQuery")) || "");
+  const [initialPokemon, setInitialPokemon] = useState(JSON.parse(localStorage.getItem("initialPokemon")) || []);
+  const [initialNextQuery, setInitialNextQuery] = useState(JSON.parse(localStorage.getItem("initialNextQuery")) || "");
   useEffect(() => {
-    getPokemon().then(({data, status}) => {
-      if (status === 200) {
-        setPokemon(data.results);
-        setNextQuery(data.next);
-        setInitialPokemon(data.results);
-        setInitialNextQuery(data.next);
-      } else {
-        console.log(`An error has occurred: ${status}`);
-      }
-    });
+    if (initialPokemon.length === 0) {
+      getPokemon().then(({data, status}) => {
+        if (status === 200) {
+          setPokemon(data.results);
+          setNextQuery(data.next);
+          setInitialPokemon(data.results);
+          setInitialNextQuery(data.next);
+          localStorage.setItem("pokemon", JSON.stringify(data.results));
+          localStorage.setItem("nextQuery", JSON.stringify(data.next));
+          localStorage.setItem("initialPokemon", JSON.stringify(data.results));
+          localStorage.setItem("initialNextQuery", JSON.stringify(data.next));
+          
+        } else {
+          console.log(`An error has occurred: ${status}`);
+        }
+      });
+    }
+
   }, []);
   const onLoadMore = () => {
     getPokemon(nextQuery).then(({data, status}) => {
       if (status === 200) {
         setPokemon(pokemon.concat(data.results));
         setNextQuery(data.next);
+        localStorage.setItem("pokemon", JSON.stringify(pokemon.concat(data.results)));
+        localStorage.setItem("nextQuery", JSON.stringify(data.next));
       } else {
         console.log(`An error has occurred: ${status}`);
       }
@@ -80,6 +90,8 @@ const Pokemon = () => {
     window.scroll({top: 0, left: 0});
     setPokemon(initialPokemon);
     setNextQuery(initialNextQuery);
+    localStorage.setItem("pokemon", JSON.stringify(initialPokemon));
+    localStorage.setItem("nextQuery", JSON.stringify(initialNextQuery));
   };
   return (
   <Container>
