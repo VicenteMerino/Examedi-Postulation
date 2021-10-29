@@ -52,7 +52,6 @@ const firstLetterUppercase = (string) => {
 };
 
 const PokemonDetail = ({ match }) => {
-  const [pokemon, setPokemon] = useState({});
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [types, setTypes] = useState([]);
@@ -66,7 +65,6 @@ const PokemonDetail = ({ match }) => {
   useEffect(() => {
     getPokemonDetail(match.params.id).then(({data, status}) => {
       if (status === 200) {
-        setPokemon(data);
         setName(firstLetterUppercase(data.name));
         setImage(pokemonImage(String(data.id).padStart(3, "0")));
         setId(String(data.id).padStart(3, "0"));

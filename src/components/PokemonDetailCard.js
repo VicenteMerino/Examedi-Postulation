@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Radar } from "react-chartjs-2";
 import styled, { css } from "styled-components";
@@ -137,7 +137,6 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
       }
     ]
   };
-  console.log(Math.max(...statsValues));
   const options = {
     plugins: {
       legend: {

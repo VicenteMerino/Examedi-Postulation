@@ -73,7 +73,7 @@ const Pokemon = () => {
       });
     }
 
-  }, []);
+  }, [initialPokemon.length]);
   const onLoadMore = () => {
     getPokemon(nextQuery).then(({data, status}) => {
       if (status === 200) {
