@@ -4,6 +4,49 @@ import getPokemonDetail from "../utils/fetch/getPokemonDetail";
 import PokemonDetailCard from "../components/PokemonDetailCard";
 import { pokemonImage } from "../utils/pokemonImage";
 
+const BackButton = styled.a`
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1rem;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f2f2f2;
+  &:hover {
+    background-color: #e6e6e6;
+  }
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  
+`;
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BackArrow = styled.i`
+border: solid black;
+border-width: 0 3px 3px 0;
+display: inline-block;
+padding: 3px;
+transform: rotate(135deg);
+-webkit-transform: rotate(135deg);
+margin-right: 10px;
+`;
+
 const firstLetterUppercase = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -19,7 +62,6 @@ const PokemonDetail = ({ match }) => {
   const [stats, setStats] = useState([]);
   const [id, setId] = useState("");
 
-  getPokemonDetail(match.params.id);
 
   useEffect(() => {
     getPokemonDetail(match.params.id).then(({data, status}) => {
@@ -39,16 +81,21 @@ const PokemonDetail = ({ match }) => {
     });
   }, [match.params.id]);
   return (
-    <PokemonDetailCard 
-    image={image} 
-    name={name} 
-    height={height} 
-    weight={weight}
-    types={types}
-    abilities={abilities}
-    stats={stats}
-    id={id}
-    />
+    <Container >
+      <BackButton onClick={() => window.history.back()}><BackArrow></BackArrow><span>Volver</span></BackButton>
+      
+      <PokemonDetailCard 
+      image={image} 
+      name={name} 
+      height={height} 
+      weight={weight}
+      types={types}
+      abilities={abilities}
+      stats={stats}
+      id={id}
+      />
+    </Container>
+
   );
 }
 

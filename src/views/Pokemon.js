@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import PokemonCard from "../components/PokemonCard";
 import getPokemon from "../utils/fetch/getPokemon";
 import "../assets/fonts.css"
@@ -19,9 +19,10 @@ flex-wrap: wrap;
 margin: 30px;
 `;
 
-const LoadMoreButton = styled.button`
+const Button = styled.button`
   background-color: white;
-  border: 1.5px solid red;
+  border: 1.5px solid;
+  border-color: ${props => props.color && css`${props.color}`};
   border-radius: 6px;
   color: #555;
   cursor: pointer;
@@ -38,16 +39,28 @@ const LoadMoreButton = styled.button`
   &:hover {
     background-color: #e6e6e6;
   }
+  margin-right: 20px;
+  margin-left: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
 `;
 
 const Pokemon = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemon, setPokemon] = useState([]);
   const [nextQuery, setNextQuery] = useState("");
+  const [initialPokemon, setInitialPokemon] = useState([]);
+  const [initialNextQuery, setInitialNextQuery] = useState("");
   useEffect(() => {
     getPokemon().then(({data, status}) => {
       if (status === 200) {
-        setPokemons(data.results);
+        setPokemon(data.results);
         setNextQuery(data.next);
+        setInitialPokemon(data.results);
+        setInitialNextQuery(data.next);
       } else {
         console.log(`An error has occurred: ${status}`);
       }
@@ -56,24 +69,31 @@ const Pokemon = () => {
   const onLoadMore = () => {
     getPokemon(nextQuery).then(({data, status}) => {
       if (status === 200) {
-        setPokemons(pokemons.concat(data.results));
+        setPokemon(pokemon.concat(data.results));
         setNextQuery(data.next);
       } else {
         console.log(`An error has occurred: ${status}`);
       }
     });
   };
-  console.log(pokemons);
-  console.log(nextQuery);
+  const onCollapse = () => {
+    window.scroll({top: 0, left: 0});
+    setPokemon(initialPokemon);
+    setNextQuery(initialNextQuery);
+  };
   return (
   <Container>
     <PokemonContainer>
-      {pokemons.map(({name, url}) => {
+      {pokemon.map(({name, url}) => {
         const id = parseInt(url.split("/")[url.split("/").length - 2]);
         return <PokemonCard name={name} id={id} url={url} key={id}/>;
       })}
     </PokemonContainer>
-    <LoadMoreButton onClick={onLoadMore}> Cargar más Pokémon</LoadMoreButton>
+    <ButtonContainer>
+      <Button color="green" onClick={onLoadMore}> Cargar más Pokémon</Button>
+      <Button color="red" onClick={onCollapse}> Colapsar</Button>
+    </ButtonContainer>
+
   </Container>
   );
 };

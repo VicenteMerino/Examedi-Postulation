@@ -42,15 +42,28 @@ font-size: 20px;
 `;
 const DetailButton = styled.button`
 margin-top: 10px;
+box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 background-color: ${props => {
   if (props.id % 3 === 0) {
-    return "red";
+    return "#F23333";
   } else if (props.id % 3 === 1) {
-    return "blue";
+    return "#3346F2";
   } else {
-    return "green";
+    return "#09843E";
   }
 }};
+&:hover {
+  background-color: ${props => {
+    if (props.id % 3 === 0) {
+      return "#F05555";
+    } else if (props.id % 3 === 1) {
+      return "#2B76F9";
+    } else {
+      return "#31B66A";
+    }
+  }};
+  
+}
 border: none;
 border-radius: 10px;
 font-family: 'Roboto', sans-serif;

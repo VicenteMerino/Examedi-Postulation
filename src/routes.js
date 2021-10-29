@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router";
 import { renderRoutes } from "react-router-config";
 import Pokemon from "./views/Pokemon";
 import PokemonDetail from "./views/PokemonDetail";
@@ -7,7 +8,7 @@ const Routes = () => {
     {
       path: "/",
       exact: true,
-      component: Pokemon,
+      render: () => <Redirect to="/pokemon"/>
     },
     {
       path: "/pokemon",
