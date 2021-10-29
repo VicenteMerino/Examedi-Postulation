@@ -77,7 +77,7 @@ const PokemonCard = ({name, id, url}) => {
       <TextId>#{pokemonId}</TextId>
       <TextName>{capitalName}</TextName>
     </TextContainer>
-    <DetailButton as="a" href={url} id={id}>Ver más</DetailButton>
+    <DetailButton as="a" href={`pokemon/${id}`} id={id}>Ver más</DetailButton>
   </Card>
   );
 };
