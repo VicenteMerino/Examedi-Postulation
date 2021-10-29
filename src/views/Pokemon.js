@@ -50,6 +50,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Pokemon = () => {
+  const maximumPokemon = 898;
   const [pokemon, setPokemon] = useState(JSON.parse(localStorage.getItem("pokemon")) || []);
   const [nextQuery, setNextQuery] = useState(JSON.parse(localStorage.getItem("nextQuery")) || "");
   const [initialPokemon, setInitialPokemon] = useState(JSON.parse(localStorage.getItem("initialPokemon")) || []);
@@ -77,10 +78,18 @@ const Pokemon = () => {
   const onLoadMore = () => {
     getPokemon(nextQuery).then(({data, status}) => {
       if (status === 200) {
-        setPokemon(pokemon.concat(data.results));
-        setNextQuery(data.next);
-        localStorage.setItem("pokemon", JSON.stringify(pokemon.concat(data.results)));
-        localStorage.setItem("nextQuery", JSON.stringify(data.next));
+        console.log(pokemon.length, data.results.length);
+        if ((pokemon.length + data.results.length) >= maximumPokemon) {
+          setPokemon(pokemon.concat(data.results.slice(0, 898 - pokemon.length)));
+          localStorage
+            .setItem("pokemon", JSON.stringify(pokemon.concat(data.results.slice(0, 898 - pokemon.length))));
+        } else {
+          setPokemon(pokemon.concat(data.results));
+          setNextQuery(data.next);
+          localStorage.setItem("pokemon", JSON.stringify(pokemon.concat(data.results)));
+          localStorage.setItem("nextQuery", JSON.stringify(data.next));
+        }
+
       } else {
         console.log(`An error has occurred: ${status}`);
       }
