@@ -15,6 +15,7 @@ text-align: center;
 const BackgroundImage = styled.div`
 background-color: #f5f5f5;
 border-radius: inherit;
+height: 60%;
 `;
 const TextContainer = styled.div`
 display: flex;
@@ -26,6 +27,8 @@ const PokemonImage = styled.img`
 display: block;
 margin-left: auto;
 margin-right: auto;
+max-width: 100%;
+max-height: 100%;
 `;
 const TextId = styled.span`
 font-weight: bold;
