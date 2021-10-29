@@ -102,8 +102,8 @@ const Pokemon = () => {
       })}
     </PokemonContainer>
     <ButtonContainer>
-      <Button color="green" onClick={onLoadMore}> Cargar más Pokémon</Button>
       <Button color="red" onClick={onCollapse}> Colapsar</Button>
+      <Button color="green" onClick={onLoadMore}> Cargar más Pokémon</Button>
     </ButtonContainer>
 
   </Container>

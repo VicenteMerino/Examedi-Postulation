@@ -155,8 +155,8 @@ const PokemonDetailCard = ({ id, image, name, types, abilities, stats, weight, h
       min: 0,
       max: Math.max(...statsValues, 150),
       ticks: {
-        maxTicksLimit: 5,
-        stepSize: 25,
+        maxTicksLimit: 4,
+        stepSize: Math.round(Math.max(...statsValues, 150) / 4),
         display: false
       }
     },

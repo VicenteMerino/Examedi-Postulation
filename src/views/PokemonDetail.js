@@ -74,7 +74,7 @@ const PokemonDetail = ({ match }) => {
         setHeight(data.height/10);
         setWeight(data.weight/10);
         setAbilities(data.abilities.map(x => firstLetterUppercase(x.ability.name)));
-        setStats(data.stats.map(x => [firstLetterUppercase(x.stat.name), x.base_stat]));
+        setStats(data.stats.map(x => [` ${x.stat.name.toUpperCase()} ` , x.base_stat]));
       } else {
         console.log(`An error has occurred: ${status}`);
       }
