@@ -6,7 +6,7 @@ Este proyecto corresponde a la Pokédex creada por Vicente Merino para la postul
 
 ## Setup
 
-En primer lugar es necesario tener `Node`, `npm` y `npx` instalados, luego es necesario instalar las dependencias con el comando:
+En primer lugar es necesario tener `Node`, `npm` instalados, luego es necesario instalar las dependencias con el comando:
 
 ```npm install```
 
@@ -25,6 +25,8 @@ El proyecto utiliza las siguientes dependencias/librerías:
 - `axios` para hacer las requests de la API.
 - `Chart.js` para crear el Spider Chart.
 
-## Otros
+## Otras Consideraciones
 
 Algo interesante que hice es que si hago varios fetchs de Pokémon y luego veo el detalle de uno, al volver atrás puedo ver los Pokémon que ya había hecho fetch, esto queda así hasta colapsar los datos, con lo que se entregan los 12 primeros. Esto lo logré, guardando el resultado en localStorage. Pensé en aprender a usar Redux, pero creo que era demasiado overkill para lo que quería hacer.
+
+Tanto para el listado como detalle de Pokémon, se considero sólo la información que se puediera obtener directamente de los endpoints `/pokemon` y `pokemon/:id`, con el fin de no sobrecargar la aplicación con requests. Por ello, no aparecen las debilidades, fortalezas que se obtenían por el tipo, o el tipo de pokémon en el listado (ya que se obtiene en el detalle).
