@@ -120,7 +120,7 @@ padding: 20px;
 
 const PokemonName = styled.h1`
 font-family: 'Roboto', sans-serif;
-font-size: 40px;
+font-size: 30px;
 font-weight: bold;
 margin-bottom: 10px;
 `
